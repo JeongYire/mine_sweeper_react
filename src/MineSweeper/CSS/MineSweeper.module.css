@@ -1,0 +1,91 @@
+
+#MineSweeperContainer{
+    width : fit-content;
+    height: fit-content;
+    background-color: silver;
+    border : 2px solid black;
+    display : flex; 
+    flex-direction: column;
+}
+#MineSweeperContainer > #MineSweeperHeaderContainer {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height:50px;
+    border-bottom : 2px solid black;
+    padding : 5px;
+}
+
+#MineSweeperHeaderContainer > #MineSweeperHeader {
+    height : 50px;
+    width : 50px;
+    position : relative;
+    border : 2px solid black ;
+    display : flex ;
+    justify-content:center;
+    align-items:center
+}
+#MineSweeperHeaderContainer > #MineSweeperHeader > #MineSweeperFace {
+    width : 100%;
+    height : 100%;
+    position : absolute;
+    object-fit : contain;
+}
+
+#MineSweeperContent {
+    padding: 5px;
+    width : fit-content;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+}
+
+#MineContainer {
+  width : fit-content;
+  height: fit-content;
+  display: grid;
+}
+.MineArea{
+   box-shadow: 0px 0px 2px 2px #dadce0 inset;
+   display: grid;
+   width: 50px;
+   height: 50px;
+}
+.Mine{
+   width: calc(100% - 4px);
+   height: calc(100% - 4px);
+   margin: 2px;
+}
+.Mine > span{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(3.5em / 2);
+    display: flex;
+}
+.Mine:not(.explosion,.dugUp){
+    cursor: pointer;
+}
+.Mine.explosion,.Mine.dugUp{
+    cursor: default;
+}
+
+.Mine.idle:hover{
+    outline: 2px solid gray;
+}
+.Mine.isFlag{
+    background-image: url('../../../public/icon/flag.png');
+    background-size: cover;
+    background-position: center;
+    background-color: gray;
+}
+.Mine.explosion{
+    background-image: url('../../../public/icon/explosion.png');
+    background-size: cover;
+    background-position: center;
+}
+.Mine.dugUp{
+    outline: 2px solid gray;
+}
+

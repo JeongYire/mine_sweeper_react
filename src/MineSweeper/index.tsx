@@ -1,17 +1,31 @@
 import { useCallback, useEffect, useRef } from "react";
 import Content from "./Content";
-import StatusContext from "./Context";
+import {StatusContext} from "./Context";
 import Header from "./Header";
 import Styles from './CSS/MineSweeper.module.css'
-import { Status, StatusContextType, StatusType } from "./types";
+import { SectionType, Status, StatusContextType, StatusType } from "./types";
 
 const MineSweeper = () => {
-    const status = useRef<Status>({Status : "Idle",SetStatus : undefined});
+    const status = useRef<Status>({Status : "Idle",SetMineStatus : undefined,SetFaceStatus : undefined});
 
-    const DispatcherStatus = useCallback((value : StatusType) => {
-        if(!status.current.SetStatus) return;
+    const DispatcherStatus = useCallback((target : SectionType,value : StatusType) => {
         status.current.Status = value;
-        status.current.SetStatus.forEach(method => method());
+
+        switch (target) {
+            case 'Header':
+                status.current.SetFaceStatus?.();
+                break;
+            case 'All' :
+                status.current.SetFaceStatus?.();
+                if(status.current.SetMineStatus !== undefined){
+                    const events = status.current.SetMineStatus as Function[];
+                    let length = events.length;
+                    for(let i = 0; i < length; i++){
+                        events[i]();
+                    }
+                }
+                break;
+        }
     },[]);
 
     const StageContext : StatusContextType = {

@@ -1,5 +1,5 @@
 import { memo, MutableRefObject, useContext, useEffect, useMemo, useRef, useState } from "react";
-import StatusContext from "../../Context";
+import {StatusContext} from "../../Context";
 import Styles  from '../../CSS/MineSweeper.module.css'
 import { Status, StatusContextType, StatusType } from "../../types";
 
@@ -13,7 +13,7 @@ const IdleFace = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setFace(faceArray.current[parseInt(`${Math.random() * 3}`)]);
+            setFace(faceArray.current[Math.floor(Math.random() * 3)]);
 
         },1500)
         return () => {
@@ -29,14 +29,8 @@ const Face = () => {
 
     const context = useContext<StatusContextType>(StatusContext);
 
-    const [status,SetFaceStatus] = useState<StatusType>(context.Status.current.Status);
-    const SetStatus = () => SetFaceStatus(context.Status.current.Status);
-
-    useEffect(() => {
-        console.log("Face 렌더링");    
-        if(!context.Status.current.SetStatus) context.Status.current.SetStatus = [];
-        context.Status.current.SetStatus.push(SetStatus);
-    },[])
+    const [status,SetStatus] = useState<StatusType>(context.Status.current.Status);
+    context.Status.current.SetFaceStatus = () => SetStatus(context.Status.current.Status);
   
 
     switch (status) {

@@ -4,7 +4,7 @@ import Styles  from '../CSS/MineSweeper.module.css'
 const Header = () => {
     return (
         <div id={Styles.MineSweeperHeaderContainer}>
-            <div id={Styles.MineSweeperHeader}>
+            <div id={Styles.MineSweeperHeader} >
                { <Face /> }
             </div>
         </div>

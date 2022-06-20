@@ -4,14 +4,17 @@ export type StatusType = 'OnMouse' | 'Death' | 'Idle'
 
 export type Status = {
     Status : StatusType,
-    SetStatus : Function[] | undefined
+    SetFaceStatus : Function | undefined,
+    SetMineStatus : Function[] | undefined,
 }
 
 export type StatusContextType = {
     Status : MutableRefObject<Status>;
-    DispatcherStatus : (value : StatusType) => void;
+    DispatcherStatus : (target : SectionType,value : StatusType) => void;
 }
 
+
+export type SectionType = 'Header' | 'All';
 
 
 export type MineInfomation = {

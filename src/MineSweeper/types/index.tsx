@@ -5,7 +5,7 @@ export type StatusType = 'OnMouse' | 'Death' | 'Idle'
 export type Status = {
     Status : StatusType,
     SetFaceStatus : Function | undefined,
-    SetMineStatus : Function[] | undefined,
+    SetContentStatus : Function | undefined,
 }
 
 export type StatusContextType = {
@@ -14,12 +14,12 @@ export type StatusContextType = {
 }
 
 
-export type SectionType = 'Header' | 'All';
+export type SectionType = 'Header' | 'Content' | 'All';
 
 
 export type MineInfomation = {
-    X : number,
-    Y : number,
+    x : number,
+    y : number,
     isMine : boolean,
     value : number
 }

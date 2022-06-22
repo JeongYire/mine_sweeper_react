@@ -1,3 +1,3 @@
-import CreateMine from "./MineMaker";
+import CreateMine from "./CreateMine";
 
 export {CreateMine};

@@ -29,11 +29,13 @@ const Face = () => {
 
     const context = useContext<StatusContextType>(StatusContext);
 
-    const [status,SetStatus] = useState<StatusType>(context.Status.current.Status);
-    context.Status.current.SetFaceStatus = () => SetStatus(context.Status.current.Status);
+
+
+    const [status,SetStatus] = useState(0);
+    context.Status.current.SetFaceStatus = () => {SetStatus(status + 1)};
   
 
-    switch (status) {
+    switch (context.Status.current.Status) {
         case "Idle":
             return (<IdleFace />);
         case "OnMouse":

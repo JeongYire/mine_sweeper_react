@@ -1,12 +1,15 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Content from "./Content";
 import {StatusContext} from "./Context";
 import Header from "./Header";
 import Styles from './CSS/MineSweeper.module.css'
 import { SectionType, Status, StatusContextType, StatusType } from "./types";
+import { render } from "react-dom";
 
 const MineSweeper = () => {
-    const status = useRef<Status>({Status : "Idle",SetMineStatus : undefined,SetFaceStatus : undefined});
+
+    const status = useRef<Status>({Status : "Idle",SetFaceStatus : undefined,SetContentStatus : undefined});
+    
 
     const DispatcherStatus = useCallback((target : SectionType,value : StatusType) => {
         status.current.Status = value;
@@ -17,20 +20,14 @@ const MineSweeper = () => {
                 break;
             case 'All' :
                 status.current.SetFaceStatus?.();
-                if(status.current.SetMineStatus !== undefined){
-                    const events = status.current.SetMineStatus as Function[];
-                    let length = events.length;
-                    for(let i = 0; i < length; i++){
-                        events[i]();
-                    }
-                }
+                status.current.SetContentStatus?.();
                 break;
         }
     },[]);
 
     const StageContext : StatusContextType = {
         Status : status,
-        DispatcherStatus : DispatcherStatus
+        DispatcherStatus : DispatcherStatus,
     }
 
     return(

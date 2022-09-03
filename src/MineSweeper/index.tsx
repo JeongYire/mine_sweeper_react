@@ -8,6 +8,8 @@ import { render } from "react-dom";
 
 const MineSweeper = () => {
 
+    const test = '.';
+
     const status = useRef<Status>({Status : "Idle",SetFaceStatus : undefined,SetContentStatus : undefined});
     
 
